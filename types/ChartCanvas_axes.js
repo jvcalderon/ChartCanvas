@@ -1,9 +1,10 @@
 /**
  * La clase ChartCanvas_axes genera gráficos de tipo cartesiano
- * 
- * @author José Vte. Calderón Cabrera <jvcalderon@n2s-group.com>
- * @copyright Copyright (c) 2013 by New Network Solutions
- * 
+ *
+ * @package ChartCanvas
+ * @license http://www.opensource.org/licenses/mit-license.php
+ * @author José Vte.Calderón <jvcalcab@gmail.com>
+ * @version 1.1.4
  * @see graphicCanvas.js
  */
 

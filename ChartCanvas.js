@@ -1,8 +1,10 @@
 /**
- * La clase ChartCanvas genera gráficos a partir de los datos facilitados. Para poder renderizar, debe extender cualquier clase proveída en ./types
- * 
- * @author José Vte. Calderón Cabrera <jvcalderon@n2s-group.com>
- * @copyright Copyright (c) 2013 by New Network Solutions
+ * ChartCanvas genera gráficos a partir de los datos facilitados. Para poder renderizar, debe extender cualquier clase proveída en ./types
+ *
+ * @package ChartCanvas
+ * @license http://www.opensource.org/licenses/mit-license.php
+ * @author José Vte.Calderón <jvcalcab@gmail.com>
+ * @version 1.1.4
  */
 
 //Construct----
