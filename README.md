@@ -13,7 +13,7 @@ Generates simple charts in canvas with client side JS or Node.JS with a responsi
 
 To use ChartCanvas class you must be include in your HTML: jQuery, ChartCanvas.js file, and chart types that you want to use in your project:
 
-<code>
+<pre><code>
 <p>&lt;!-- You must include this code in HEAD --&gt;</p>
 <p>&lt;head&gt;<br />
   &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;&gt;&lt;/script&gt;<br />
@@ -24,5 +24,5 @@ To use ChartCanvas class you must be include in your HTML: jQuery, ChartCanvas.j
   &lt;script src=&quot;types/ChartCanvas_axes.js&quot;&gt;&lt;/script&gt;<br />
   &lt;script src=&quot;types/ChartCanvas_pie.js&quot;&gt;&lt;/script&gt;<br />
   &lt;/head&gt;</p>
-</code>
+</code></pre>
 
