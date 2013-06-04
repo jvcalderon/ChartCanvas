@@ -9,6 +9,8 @@ Generates simple charts in canvas with client side JS or Node.JS with a responsi
 - Support for Node.JS
 - Responsive design
 
+Before you read this doc. I recommend see the example HTML file in doc directory.
+
 ## Basic use
 
 To use ChartCanvas class you must be include in your HTML: jQuery, ChartCanvas.js file, and chart types that you want to use in your project:
@@ -71,9 +73,9 @@ You can set the following vars with the configuration text in JSON:
 <table>
 	<thead>
 		<tr>
-			<td>Var</td>
-			<td>Extension</td>
-			<td>Description</td>
+			<td><strong>Var</strong></td>
+			<td><strong>Extension</strong></td>
+			<td><strong>Description</strong></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -119,4 +121,141 @@ You can set the following vars with the configuration text in JSON:
 		</tr>
 	</tbody>
 </table>
+
+## Available extensions
+
+### ChartCanvas_axes
+Cartesian charts.
+* graphTypes: lines, linesFill, linesPoints, steps, stepsFill, bars, points
+
+### ChartCanvas_pie
+Pie charts.
+* graphTypes: donut, pie
+
+## Examples
+
+Sets of values on a cartesian chart.
+You can see the example image in: https://raw.github.com/jvcalderon/ChartCanvas/master/doc/cartesianGraph.jpeg
+
+And here is the code:
+
+<pre><code>
+var dataBar11_0 = [
+    [1338501600000, 2]
+    , [1338933600000, 1]
+    , [1339106400000, 1]
+    , [1339279200000, 6]
+    , [1340488800000, 1]
+    , [1341093600000, 2]                                                    
+    ];
+dataArray.push(dataBar11_0);
+ 
+var dataBar11_1 = [
+    [1338588000000, 1]
+    , [1338847200000, 1]
+    , [1339279200000, 4]
+    , [1339365600000, 1]
+    , [1339538400000, 1]
+    , [1339624800000, 1]
+    , [1339711200000, 6]
+    , [1340316000000, 3]
+    , [1340402400000, 1]
+    , [1340488800000, 2]
+    , [1341007200000, 1]
+    , [1341093600000, 1]            
+    ];
+ 
+ 
+dataArray.push(dataBar11_1);
+    var dataBar11_2 = [
+    [1338588000000, 3]
+    , [1338847200000, 10]
+    , [1339279200000, 8]
+    , [1339365600000, 2]                
+    ];
+dataArray.push(dataBar11_2);
+ 
+var jsonSettings = { "data" :     dataArray,
+    "precision" : "day",
+    "graphTypes" : ["points", "linesFill"],
+    "labels" : ['Grafica 1', 'Otra grafica mas', 'Y otra']
+    };
+ 
+ 
+var canvas = $.extend(new ChartCanvas($("#canvas")[0], jsonSettings), new ChartCanvas_axes(jsonSettings));
+$("#canvas").data('ChartCanvas', canvas);
+$("#canvas").data('ChartCanvas').render();
+</code></pre>
+
+## Using ChartCanvas with Node.JS
+
+We can use ChartCanvas as a Node.JS module. Here is an example for convert a canvas into a PNG.
+
+To install the necessary modules we move into the directory where you saved the ChartCanvas folder and run:
+
+<pre><code>
+npm install canvas #Allow us to convert a canvas to PNG
+npm install jsdom #Allows the use of JQuery on server
+</code></pre>
+
+And here the code:
+
+<pre><code>
+var Jsdom = require('jsdom');
+var ChartCanvas = require('./ChartCanvas/ChartCanvas.js');  
+var Extend = require('./extendClasses.js');
+var Canvas = require('canvas')
+    , fs = require('fs');
+ 
+//Chart data------------------------------
+ 
+dataArray.push(dataBar11_1);
+    var dataBar11_2 = [
+    [1338588000000, 3]
+    , [1338847200000, 10]
+    , [1339279200000, 8]
+    , [1339365600000, 2]                
+    ];
+dataArray.push(dataBar11_2);
+  
+var jsonSettings = { "data" :     dataArray,
+    "precision" : "day",
+    "graphTypes" : ["points", "linesFill"],
+    "labels" : ['Grafica 1', 'Otra grafica mas', 'Y otra']
+    };
+ 
+//--------------------------
+ 
+Jsdom.env({
+    html: '<html><body></body></html>',
+    scripts: [
+        'http://code.jquery.com/jquery-1.5.min.js'
+    ]
+    }, function (err, window) {       
+        var $ = window.jQuery;
+        var canvas = new Canvas(800, 300);//Width and height
+        var parent = new ChartCanvas(canvas, jsonSettings);
+         
+        //For Pie Chart
+        var ChartCanvas_pie = require('./ChartCanvas/types/ChartCanvas_pie.js');
+        var child = new ChartCanvas_pie(jsonSettings);
+ 
+        /* //For cartesian graph
+        var ChartCanvas_axes = require('./ChartCanvas/types/ChartCanvas_axes.js');
+        var child = new ChartCanvas_axes(jsonSettings);
+        */
+         
+        var objCanvas = Extend.extend(parent, child);
+        objCanvas.render(); 
+        Canvas.ctx = objCanvas.ctx;
+         
+        var out = fs.createWriteStream(__dirname + 'myPNG.png')
+        , stream = canvas.createPNGStream();
+ 
+        stream.on('data', function(chunk){
+            out.write(chunk);
+            });
+ 
+    });
+</code></pre>
 
