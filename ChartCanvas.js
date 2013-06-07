@@ -111,7 +111,8 @@ ChartCanvas.prototype.renderLabelList = function() {
 		var listPadding = 5;
 		var listWidth = 130;
 		var maxCharWidth = 14;
-		var listHeight = (this._LABEL_LIST.length * fontSizeForList) + (this._LABEL_LIST.length * listPadding) + (listPadding*2);
+		var numRows = this.getNumRowsInLabelList();
+		var listHeight = (numRows * fontSizeForList) + (numRows * listPadding) + (listPadding*2);
 		
 		this.ctx.lineWidth = 1;
 		this.ctx.fillStyle = "rgb(255,255,255)";
@@ -119,28 +120,57 @@ ChartCanvas.prototype.renderLabelList = function() {
 		this.ctx.font = fontSizeForList+"px Verdana";
 		this.ctx.fillRect(this.canvasWidth-listWidth-this._LABEL_LIST_MARGIN-(listPadding*2), this._LABEL_LIST_MARGIN, listWidth-this._LABEL_LIST_MARGIN, listHeight);
 		
+		$currentRowCount = 0;
 		for(var i=0; i<this._LABEL_LIST.length; i++)
 			{
 
-			this.ctx.fillStyle = "rgb("+this._COLORS[i]+")";
-			var top = ((listPadding+fontSizeForList)*i)+this._LABEL_LIST_MARGIN+listPadding;
-			var left = (this.canvasWidth-listWidth)-listPadding-this._LABEL_LIST_MARGIN;
-			this.ctx.fillRect(left, top, fontSizeForList+listPadding, fontSizeForList+Math.floor(listPadding/2));
-			this.ctx.fillStyle = "rgb(88,88,88)";
-			
 			var labelText = this._LABEL_LIST[i];
-			if(labelText.length > maxCharWidth)
-				{
-				labelText = labelText.substring(0, maxCharWidth)+'...';
-				}
 			
-			this.ctx.fillText(labelText, left+fontSizeForList+(listPadding*2), top+fontSizeForList);
+			if(labelText != '')
+				{
+			
+				this.ctx.fillStyle = "rgb("+this._COLORS[i]+")";
+				var top = ((listPadding+fontSizeForList)*$currentRowCount)+this._LABEL_LIST_MARGIN+listPadding;
+				var left = (this.canvasWidth-listWidth)-listPadding-this._LABEL_LIST_MARGIN;
+				this.ctx.fillRect(left, top, fontSizeForList+listPadding, fontSizeForList+Math.floor(listPadding/2));
+				this.ctx.fillStyle = "rgb(88,88,88)";
+				
+				if(labelText.length > maxCharWidth)
+					{
+					labelText = labelText.substring(0, maxCharWidth)+'...';
+					}
+				
+				this.ctx.fillText(labelText, left+fontSizeForList+(listPadding*2), top+fontSizeForList);
+				
+				$currentRowCount++;
+				
+				}
 				
 			}
 		
 		this.ctx.stroke();
 		
 		}
+	
+	};
+	
+
+ChartCanvas.prototype.getNumRowsInLabelList = function() {
+	
+	$numRows = 0;
+	
+	for(var i=0; i<this._LABEL_LIST.length; i++)
+		{
+		
+		var labelText = this._LABEL_LIST[i];
+		if(labelText != '')
+			{
+			$numRows++;
+			}
+		
+		}
+	
+	return $numRows;
 	
 	};
 	
