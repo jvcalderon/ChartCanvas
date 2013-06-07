@@ -140,6 +140,8 @@ You can see the example image in: https://raw.github.com/jvcalderon/ChartCanvas/
 And here is the code:
 
 <pre><code>
+var dataArray = new Array();
+
 var dataBar11_0 = [
     [1338501600000, 2]
     , [1338933600000, 1]
