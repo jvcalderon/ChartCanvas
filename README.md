@@ -261,3 +261,46 @@ Jsdom.env({
     });
 </code></pre>
 
+## How to install ChartCanvas on Symfony2
+
+* You must modify composer.json file with the following code:
+<pre><code>
+	...
+	"repositories": [
+	        {
+		        "type": "package",
+		        "package": {
+		            "name": "jvcalderon/ChartCanvas",
+		            "version": "1.1.5",
+		            "dist": {
+		                "url": "https://github.com/jvcalderon/ChartCanvas/archive/1.1.5.zip",
+		                "type": "zip"
+		            }
+		        }
+	        }
+	    ],
+	...
+	 "require": {
+		...
+        "jvcalderon/ChartCanvas": "1.1.*"
+    },
+</code></pre>
+
+* Now you must update the vendors:
+<pre><code>
+	composer update
+</code></pre>
+
+That's all!
+
+You can include the scripts in your Twig template with Assetic:
+<pre><code>
+	{% javascripts
+		'%kernel.root_dir%/../vendor/jvcalderon/ChartCanvas/ChartCanvas.js'
+		'%kernel.root_dir%/../vendor/jvcalderon/ChartCanvas/types/ChartCanvas_axes.js'
+		'%kernel.root_dir%/../vendor/jvcalderon/ChartCanvas/types/ChartCanvas_pie.js'
+		%}
+		<script type="text/javascript" charset="utf-8" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+</code></pre>
+
