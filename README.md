@@ -135,7 +135,7 @@ Pie charts.
 ## Examples
 
 Sets of values on a cartesian chart.
-You can see the example image in: https://raw.github.com/jvcalderon/ChartCanvas/master/doc/cartesianGraph.jpeg
+![Cartesian Graph](https://raw.github.com/jvcalderon/ChartCanvas/master/doc/cartesianGraph.jpeg)
 
 And here is the code:
 
