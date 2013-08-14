@@ -62,7 +62,9 @@ $("#canvas").data('ChartCanvas', canvas);
 $("#canvas").data('ChartCanvas').render();    
 </code></pre>
 
-You can see the result in: https://raw.github.com/jvcalderon/ChartCanvas/master/doc/pieChart.jpeg
+The result:
+
+![Pie Chart](https://raw.github.com/jvcalderon/ChartCanvas/master/doc/pieChart.jpeg)
 
 If you look at the code above, we see that "ChartCanvas" extends in this case "ChartCanvas_pie" if it were a Cartesian graph extend "ChartCanvas_axes".
 
@@ -134,10 +136,10 @@ Pie charts.
 
 ## Examples
 
-Sets of values on a cartesian chart.
+Sets of values in a cartesian chart.
 ![Cartesian Graph](https://raw.github.com/jvcalderon/ChartCanvas/master/doc/cartesianGraph.jpeg)
 
-And here is the code:
+Here is the code:
 
 <pre><code>
 var dataArray = new Array();
